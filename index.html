@@ -216,6 +216,36 @@ footer a:hover{color:white}
 @media(max-width:700px){.lightbox{padding:65px 48px}.tour-viewer>img{height:290px}.tour-caption{grid-template-columns:1fr auto;gap:10px}.tour-caption>span{grid-column:1/-1}.calendar-shell{padding:15px}.calendar-day,.calendar-weekday{font-size:.75rem;padding:8px 1px}.calendar-day{min-height:36px}.calendar-top{align-items:flex-start;flex-direction:column}.impact-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 
+
+/* Mbagathi interactive experiences */
+.rhythm{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:34px}
+.rhythm article{background:var(--paper);border-top:4px solid var(--gold);padding:20px;border-radius:7px;box-shadow:0 6px 20px #263c250c}
+.rhythm article span{font-size:.78rem;color:var(--terracotta);font-weight:700;letter-spacing:1px}
+.rhythm h3{color:var(--green);font-size:1.15rem;margin:9px 0}
+.rhythm p{color:var(--muted);font-size:.9rem}
+.explorer{margin-top:28px;background:var(--paper);border-radius:9px;padding:24px;box-shadow:0 7px 24px #263c2510}
+.explorer-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+.explorer-tabs button{border:1px solid #d8d2c4;background:var(--cream);color:var(--green);padding:10px 14px;border-radius:5px;cursor:pointer;font-weight:700}
+.explorer-tabs button[aria-pressed="true"]{background:var(--green);color:white;border-color:var(--green)}
+.explorer-content{min-height:95px}
+.explorer-content h3{color:var(--green);margin-bottom:7px}
+.explorer-content p{color:var(--muted)}
+.farm-discover{margin-top:18px}
+.farm-discover button{border:1px solid var(--green);background:var(--green);color:white;padding:11px 17px;border-radius:5px;cursor:pointer;font-weight:700}
+.farm-extra{display:none;margin-top:15px;padding:17px;background:var(--paper);border-radius:7px;color:var(--muted)}
+.farm-extra.open{display:block}
+.festival-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0}
+.festival-card{background:var(--paper);border-radius:8px;padding:20px;border-bottom:3px solid var(--gold)}
+.festival-card span{font-size:1.5rem}
+.festival-card h3{color:var(--green);font-size:1.15rem;margin:8px 0}
+.festival-card p{font-size:.88rem;color:var(--muted)}
+.learning-prompt{margin-top:30px;padding:25px;background:var(--green);color:white;border-radius:9px}
+.learning-prompt h3{color:#f0c77e;font-size:1.35rem;margin-bottom:8px}
+.learning-prompt p{color:#f1f3ec}
+.learning-prompt button{margin-top:15px;border:1px solid #ffffff8a;background:transparent;color:white;padding:9px 14px;border-radius:5px;cursor:pointer}
+@media(max-width:850px){.rhythm{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.rhythm,.festival-strip{grid-template-columns:1fr}.explorer{padding:17px}}
+
 </style>
 </head>
 <body>
@@ -318,6 +348,24 @@ footer a:hover{color:white}
  </div>
 </section>
 
+
+<section class="section" id="day-at-mbagathi">
+ <div class="container">
+  <div class="center">
+   <div class="eyebrow">A glimpse into the day</div>
+   <h2>Learning happens in many ways</h2>
+   <p class="section-intro">A simple look at the kinds of experiences that can shape a school day. The exact timetable and order vary by class and day.</p>
+  </div>
+  <div class="rhythm">
+   <article><span>01 · GATHER</span><h3>Begin together</h3><p>Classes and community routines help children settle in and connect with the day.</p></article>
+   <article><span>02 · EXPLORE</span><h3>Deep learning</h3><p>The school describes a morning Main Lesson, where a subject may be explored in a focused block.</p></article>
+   <article><span>03 · CREATE</span><h3>Use head, heart and hands</h3><p>Art, music, movement and practical activities bring different ways of learning into the experience.</p></article>
+   <article><span>04 · CONNECT</span><h3>Share and reflect</h3><p>Friendships, shared spaces and community activities are part of life at school.</p></article>
+  </div>
+  <p class="small-note">This is an illustrative overview, not the school's official daily timetable.</p>
+ </div>
+</section>
+
 <section class="section" id="school-details">
  <div class="container">
   <div class="center">
@@ -356,6 +404,23 @@ footer a:hover{color:white}
   </div>
   <img src="/images/DSCN4154-1-scaled.jpg" alt="Children playing flutes at a school event">
  </div>
+ <div class="container">
+  <div class="explorer" aria-label="Explore school activities">
+   <p class="eyebrow">Choose an activity</p>
+   <div class="explorer-tabs" role="group" aria-label="Activity categories">
+    <button type="button" data-activity="music" aria-pressed="true">Music</button>
+    <button type="button" data-activity="art" aria-pressed="false">Art and handwork</button>
+    <button type="button" data-activity="nature" aria-pressed="false">Nature</button>
+    <button type="button" data-activity="movement" aria-pressed="false">Movement</button>
+   </div>
+   <div class="explorer-content" id="activityContent" aria-live="polite"><h3>Music and expression</h3><p>The school's published information includes music and instrumental activities. This real school photograph shows children playing flute at an event.</p></div>
+  </div>
+  <div class="learning-prompt">
+   <h3 id="learningPromptTitle">A little learning challenge</h3>
+   <p id="learningPromptText">What sounds can you hear around you right now? Can you describe their rhythm, pitch and pattern?</p>
+   <button type="button" id="nextLearningPrompt">Try another prompt ↗</button>
+  </div>
+</div>
 </section>
 
 <section class="section tour-section" id="tour">
@@ -406,6 +471,12 @@ footer a:hover{color:white}
    <h2>School events and calendar</h2>
    <p class="section-intro">School gatherings, celebrations and activities are an important part of community life. The school office can confirm upcoming dates and arrangements.</p>
   </div>
+
+  <div class="festival-strip" aria-label="School celebrations">
+   <article class="festival-card"><span aria-hidden="true">☀️</span><h3>St John's Festival</h3><p>A seasonal celebration named in the school's published parent information.</p></article>
+   <article class="festival-card"><span aria-hidden="true">🍂</span><h3>Michaelmas</h3><p>A school tradition associated with courage, community and the changing seasons.</p></article>
+   <article class="festival-card"><span aria-hidden="true">🕯️</span><h3>Advent</h3><p>A reflective period included among the school's community celebrations.</p></article>
+  </div>
   <div class="calendar-shell">
    <div class="calendar-top"><div><h3 id="calendarMonth">School calendar</h3><p>Dates will be added after confirmation by the school.</p></div><div class="calendar-controls"><button type="button" id="calendarPrev" aria-label="Previous month">←</button><button type="button" id="calendarToday">Today</button><button type="button" id="calendarNext" aria-label="Next month">→</button></div></div>
    <div class="calendar-grid" id="calendarGrid" aria-label="Monthly calendar"></div>
@@ -422,6 +493,7 @@ footer a:hover{color:white}
    <h2>Growing with the natural world</h2>
    <p class="section-intro">Nature offers lessons that go beyond textbooks. Gardening and practical experiences can help children develop patience, responsibility and an appreciation for the environment.</p>
    <p class="section-intro">The school's farm and garden activities connect learning with the rhythms of the natural world and the value of caring for living things.</p>
+   <div class="farm-discover"><button type="button" id="farmDiscover" aria-expanded="false">Explore the farm and garden +</button><div class="farm-extra" id="farmExtra"><p>The school's published information describes vegetable growing, an orchard, cows and approaches including organic, biodynamic and syntropic farming. These details are a starting point; please confirm current farm activities and visiting arrangements with the school.</p></div></div>
   </div>
  </div>
 </section>
@@ -742,6 +814,28 @@ const themeToggle=document.getElementById('themeToggle');function setTheme(dark)
 const progressBar=document.getElementById('readingProgress'),backTop=document.getElementById('backToTop');function updateScrollTools(){const max=document.documentElement.scrollHeight-innerHeight;progressBar.style.width=(max>0?scrollY/max*100:0)+'%';backTop.classList.toggle('visible',scrollY>450);}addEventListener('scroll',updateScrollTools,{passive:true});addEventListener('resize',updateScrollTools);updateScrollTools();backTop.addEventListener('click',()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
 // 5. Gentle reveal animations, disabled for reduced-motion users.
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window){document.body.classList.add('reveal-ready');const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('revealed');observer.unobserve(entry.target);}}),{threshold:.08});document.querySelectorAll('main section .container > *, main section .container > div > *').forEach(el=>{el.classList.add('reveal');observer.observe(el);});}
+
+
+// Interactive activity explorer: all descriptions are based on published school information.
+const activityDetails={
+ music:{title:'Music and expression',text:'The school lists music and instrumental activities among its learning experiences. This real school photograph shows children playing flute at an event.'},
+ art:{title:'Art, making and handwork',text:'Published school information includes painting, poetry, storytelling, handwork and woodworking as part of a broad education.'},
+ nature:{title:'Nature and gardening',text:'The school describes gardening, vegetable growing, an orchard and farm activities that connect learning with the natural world.'},
+ movement:{title:'Movement and physical activity',text:'The school lists swimming, sports and movement among its activities. Ask the school about the current programme for each class.'}
+};
+document.querySelectorAll('[data-activity]').forEach(button=>button.addEventListener('click',()=>{
+ const item=activityDetails[button.dataset.activity];document.querySelectorAll('[data-activity]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+ document.getElementById('activityContent').innerHTML='<h3>'+item.title+'</h3><p>'+item.text+'</p>';
+}));
+const learningPrompts=[
+ ['A little learning challenge','What sounds can you hear around you right now? Can you describe their rhythm, pitch and pattern?'],
+ ['Look closely','Find a leaf or flower. What shapes, lines and patterns can you notice?'],
+ ['Tell a story','Choose an everyday object. Imagine its journey before it reached you.'],
+ ['Think like a scientist','What is one question about the natural world you would like to investigate?']
+];let learningPromptIndex=0;
+document.getElementById('nextLearningPrompt').addEventListener('click',()=>{learningPromptIndex=(learningPromptIndex+1)%learningPrompts.length;document.getElementById('learningPromptTitle').textContent=learningPrompts[learningPromptIndex][0];document.getElementById('learningPromptText').textContent=learningPrompts[learningPromptIndex][1];});
+const farmDiscover=document.getElementById('farmDiscover'),farmExtra=document.getElementById('farmExtra');
+farmDiscover.addEventListener('click',()=>{const open=farmExtra.classList.toggle('open');farmDiscover.setAttribute('aria-expanded',String(open));farmDiscover.textContent=open?'Show less −':'Explore the farm and garden +';});
 
 </script>
 </body>
