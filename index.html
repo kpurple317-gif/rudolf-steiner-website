@@ -38,6 +38,7 @@ h2{font-size:clamp(2rem,4vw,3rem);color:var(--green)}
 .btn-light{background:var(--cream);color:var(--green)}
 .btn-light:hover{background:white}
 header{background:var(--paper);position:sticky;top:0;z-index:100;box-shadow:0 2px 15px #172c1710}
+.nav-tools{display:flex;align-items:center;gap:8px;margin-left:auto}.utility-btn{border:1px solid #d8d2c4;background:var(--cream);color:var(--green);border-radius:5px;padding:8px 11px;cursor:pointer;font-weight:700}.utility-btn:hover{background:#eee9dc}
 .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{display:flex;align-items:center;gap:12px;color:var(--green);font-weight:700}
 .brand img{width:47px;height:47px;object-fit:contain;border-radius:50%}
@@ -153,6 +154,10 @@ header{background:var(--paper);position:sticky;top:0;z-index:100;box-shadow:0 2p
 .contact-item a{color:var(--terracotta);overflow-wrap:anywhere}
 .contact-note{background:#eee9dc;padding:25px;border-radius:8px}
 footer{background:var(--deep);color:#e6e9df;padding:42px 0 20px}
+#readingProgress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--gold);z-index:500;transition:width .08s linear}#backToTop{position:fixed;right:20px;bottom:20px;z-index:150;width:46px;height:46px;border:0;border-radius:50%;background:var(--green);color:white;font-size:1.35rem;box-shadow:0 5px 18px #0003;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(10px);transition:.2s}#backToTop.visible{opacity:1;visibility:visible;transform:none}
+.search-panel{display:none;background:var(--paper);padding:14px 5%;border-top:1px solid #e6e0d4}.search-panel.open{display:block}.search-inner{max-width:850px;margin:auto;display:flex;gap:10px}.search-inner input{flex:1;min-width:0;padding:12px;border:1px solid #cfc8b9;border-radius:5px;font:inherit}.search-message{max-width:850px;margin:6px auto 0;color:var(--muted);font-size:.82rem}.gallery-tools{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}.gallery-tools button{border:1px solid #d8d2c4;background:var(--paper);color:var(--green);padding:9px 14px;border-radius:5px;cursor:pointer;font-weight:600}
+body.dark-mode{--green:#b7d0b9;--deep:#101e16;--cream:#18251d;--paper:#223128;--text:#edf1e9;--muted:#c0c9bf;--terracotta:#d28a69;--gold:#e3bb72;background:var(--cream);color:var(--text)}body.dark-mode .soft,body.dark-mode .farm,body.dark-mode .tour-section,body.dark-mode .step,body.dark-mode .calendar-note,body.dark-mode .calendar-weekday{background:#29382e}body.dark-mode .philosophy{background:#101e16}body.dark-mode .sponsor{background:#8f5038}body.dark-mode .enquiry-form,body.dark-mode .contact-note{background:#29382e}body.dark-mode .calendar-day{background:#29382e;color:var(--text)}body.dark-mode .nav-links,body.dark-mode header{background:var(--paper)}body.dark-mode .utility-btn,body.dark-mode .gallery-tools button,body.dark-mode .tour-controls button,body.dark-mode .calendar-controls button{background:#29382e;color:var(--text);border-color:#536356}
+.reveal-ready .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}.reveal-ready .reveal.revealed{opacity:1;transform:none}@media(max-width:850px){.nav-tools{gap:5px}.utility-btn{padding:7px 9px;font-size:.82rem}}@media(max-width:700px){.nav{flex-wrap:wrap;padding:10px 0}.nav-tools{margin-left:auto}.menu-btn{order:3}.nav-links{top:100%}.search-inner{flex-direction:column}.gallery-tools{gap:7px}.gallery-tools button{font-size:.85rem;padding:8px 10px}}@media(prefers-reduced-motion:reduce){.reveal-ready .reveal{opacity:1;transform:none;transition:none}#backToTop{transition:none}}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}
 footer h3{color:#f0c77e;margin-bottom:13px;font-size:1.2rem}
 footer p,footer a{font-size:.9rem;color:#d5ded4}
@@ -221,6 +226,7 @@ footer a:hover{color:white}
    <img src="/images/IMG_27effba4-f81a-446d-9c55-fd640f99387c.webp" alt="School sign">
    <span>Rudolf Steiner School<br>Mbagathi</span>
   </a>
+  <div class="nav-tools"><button class="utility-btn" type="button" id="searchToggle" aria-expanded="false" aria-controls="siteSearch">Search</button><button class="utility-btn" type="button" id="themeToggle" aria-pressed="false">Dark mode</button></div>
   <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
   <nav class="nav-links" id="navLinks">
    <a href="#about">About</a>
@@ -237,6 +243,7 @@ footer a:hover{color:white}
   </nav>
  </div>
 </header>
+<div class="search-panel" id="siteSearch"><div class="search-inner"><input id="siteSearchInput" type="search" placeholder="Search admissions, boarding, sponsorship..." aria-label="Search this website"><button class="utility-btn" type="button" id="searchSubmit">Find</button><button class="utility-btn" type="button" id="searchClose">Close</button></div><p class="search-message" id="searchMessage" role="status" aria-live="polite">Search information on this page.</p></div>
 
 <main>
 <section class="hero" id="home">
@@ -364,6 +371,7 @@ footer a:hover{color:white}
    <img src="/images/IMG_7ed0fbe8-f42e-4900-95df-a58008f10a41.webp" alt="Dining area for students">
    <img src="/images/Agnes-scaled.jpg" alt="Boarding parent with children">
   </div>
+  <div class="gallery-tools"><button type="button" id="slideshowToggle" aria-pressed="false">▶ Start slideshow</button><button type="button" id="slideshowPrev">← Previous</button><button type="button" id="slideshowNext">Next →</button><span class="small-note" id="slideshowStatus" role="status" aria-live="polite">Slideshow is paused.</span></div>
  </div>
 </section>
 
@@ -566,6 +574,7 @@ footer a:hover{color:white}
   <div class="copyright">© <span id="year"></span> Rudolf Steiner School Mbagathi. Website concept.</div>
  </div>
 </footer>
+<div id="readingProgress" aria-hidden="true"></div><button id="backToTop" type="button" aria-label="Back to top" title="Back to top">↑</button>
 <div class="lightbox" id="galleryLightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Photo viewer">
  <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close photo viewer">×</button><button type="button" class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
  <figure><img id="lightboxImage" src="" alt=""><figcaption id="lightboxCaption"></figcaption></figure><button type="button" class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
@@ -687,6 +696,23 @@ document.getElementById('calendarPrev').addEventListener('click',()=>{calendarDa
 document.getElementById('calendarNext').addEventListener('click',()=>{calendarDate.setMonth(calendarDate.getMonth()+1);renderCalendar();});
 document.getElementById('calendarToday').addEventListener('click',()=>{calendarDate=new Date();renderCalendar();});
 renderCalendar();
+
+
+// 1. Gallery slideshow
+const slideshowToggle=document.getElementById('slideshowToggle'),slideshowStatus=document.getElementById('slideshowStatus');let slideshowTimer=null;
+function stopSlideshow(){if(slideshowTimer){clearInterval(slideshowTimer);slideshowTimer=null;}slideshowToggle.textContent='▶ Start slideshow';slideshowToggle.setAttribute('aria-pressed','false');slideshowStatus.textContent='Slideshow is paused.';}
+function startSlideshow(){if(galleryImages.length<2)return;stopSlideshow();slideshowTimer=setInterval(()=>{if(!document.hidden)showGalleryImage(galleryIndex+1);},4000);slideshowToggle.textContent='Ⅱ Pause slideshow';slideshowToggle.setAttribute('aria-pressed','true');slideshowStatus.textContent='Slideshow is playing. Photos change every four seconds.';}
+slideshowToggle.addEventListener('click',()=>slideshowTimer?stopSlideshow():startSlideshow());document.getElementById('slideshowPrev').addEventListener('click',()=>openLightbox(galleryIndex-1));document.getElementById('slideshowNext').addEventListener('click',()=>openLightbox(galleryIndex+1));document.addEventListener('visibilitychange',()=>{if(document.hidden&&slideshowTimer)stopSlideshow();});
+// 2. Search this page locally; no search data is transmitted.
+const searchPanel=document.getElementById('siteSearch'),searchInput=document.getElementById('siteSearchInput'),searchMessage=document.getElementById('searchMessage'),searchToggle=document.getElementById('searchToggle');
+function runSiteSearch(){const q=searchInput.value.trim().toLocaleLowerCase();if(!q){searchMessage.textContent='Type a word or phrase to search this website.';return;}const sections=Array.from(document.querySelectorAll('main section[id]'));const match=sections.find(section=>section.innerText.toLocaleLowerCase().includes(q));if(match){searchMessage.textContent='Found information in '+(match.querySelector('h1,h2,h3')?.innerText||match.id)+'.';match.scrollIntoView({behavior:'smooth'});searchPanel.classList.remove('open');searchToggle.setAttribute('aria-expanded','false');}else searchMessage.textContent='No matching section found. Try admissions, boarding, sponsorship or contact.';}
+searchToggle.addEventListener('click',()=>{const open=searchPanel.classList.toggle('open');searchToggle.setAttribute('aria-expanded',String(open));if(open)searchInput.focus();});document.getElementById('searchSubmit').addEventListener('click',runSiteSearch);searchInput.addEventListener('keydown',e=>{if(e.key==='Enter')runSiteSearch();});document.getElementById('searchClose').addEventListener('click',()=>{searchPanel.classList.remove('open');searchToggle.setAttribute('aria-expanded','false');});
+// 3. Dark mode with optional device-local preference.
+const themeToggle=document.getElementById('themeToggle');function setTheme(dark){document.body.classList.toggle('dark-mode',dark);themeToggle.textContent=dark?'Light mode':'Dark mode';themeToggle.setAttribute('aria-pressed',String(dark));}let savedTheme=null;try{savedTheme=localStorage.getItem('mbagathi-theme');}catch(e){}setTheme(savedTheme==='dark');themeToggle.addEventListener('click',()=>{const dark=!document.body.classList.contains('dark-mode');setTheme(dark);try{localStorage.setItem('mbagathi-theme',dark?'dark':'light');}catch(e){}});
+// 4. Reading progress and 6. Back-to-top.
+const progressBar=document.getElementById('readingProgress'),backTop=document.getElementById('backToTop');function updateScrollTools(){const max=document.documentElement.scrollHeight-innerHeight;progressBar.style.width=(max>0?scrollY/max*100:0)+'%';backTop.classList.toggle('visible',scrollY>450);}addEventListener('scroll',updateScrollTools,{passive:true});addEventListener('resize',updateScrollTools);updateScrollTools();backTop.addEventListener('click',()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
+// 5. Gentle reveal animations, disabled for reduced-motion users.
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window){document.body.classList.add('reveal-ready');const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('revealed');observer.unobserve(entry.target);}}),{threshold:.08});document.querySelectorAll('main section .container > *, main section .container > div > *').forEach(el=>{el.classList.add('reveal');observer.observe(el);});}
 
 </script>
 </body>
