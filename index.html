@@ -116,6 +116,34 @@ header{background:var(--paper);position:sticky;top:0;z-index:100;box-shadow:0 2p
 .step h3{color:var(--green);margin:10px 0}
 .step p{color:var(--muted);font-size:.92rem}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:30px}
+.team-card{padding-top:22px}
+.team-mark{display:grid;place-items:center;height:75px;color:var(--terracotta);font-size:2.2rem;background:#eee9dc}
+.editor-note,.small-note{font-size:.82rem;color:var(--muted);margin-top:18px}
+.event-panel,.story-panel{display:flex;gap:22px;align-items:flex-start;max-width:850px;margin:35px auto 0;padding:30px;background:var(--paper);border-radius:8px}
+.event-icon{font-size:2.1rem;color:var(--terracotta)}
+.event-panel h3,.story-panel h3{font-size:1.35rem;color:var(--green);margin-bottom:8px}
+.event-panel p,.story-panel p{color:var(--muted);margin-bottom:12px}
+.text-link{color:var(--terracotta);font-weight:700}
+.prospectus-layout{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.prospectus-preview{background:var(--paper);padding:30px;border:1px solid #e2dccf;border-top:6px solid var(--green);box-shadow:0 8px 24px #263c2510}
+.prospectus-preview h3{font-size:1.8rem;color:var(--green);margin:12px 0}
+.prospectus-preview p,.prospectus-preview li{color:var(--muted)}
+.prospectus-preview ul{padding-left:20px;margin-top:15px}
+.prospectus-layout .btn{margin-top:22px;border:0;cursor:pointer}
+.faq-list{max-width:850px;margin:35px auto 0}
+.faq-list details{background:var(--paper);border-bottom:1px solid #e3ddcf;padding:18px 20px}
+.faq-list details:first-child{border-radius:8px 8px 0 0}
+.faq-list details:last-child{border-radius:0 0 8px 8px}
+.faq-list summary{cursor:pointer;color:var(--green);font-weight:700}
+.faq-list details p{color:var(--muted);padding-top:12px}
+@media print{
+ body{background:white}
+ body *{visibility:hidden!important}
+ #prospectus,#prospectus *{visibility:visible!important}
+ #prospectus{position:absolute;left:0;top:0;width:100%;padding:20px;background:white}
+ #prospectus .btn,#prospectus .small-note{display:none!important}
+ #prospectus .prospectus-preview{box-shadow:none}
+}
 .contact-item{margin:18px 0}
 .contact-item strong{display:block;color:var(--green)}
 .contact-item a{color:var(--terracotta);overflow-wrap:anywhere}
@@ -138,7 +166,8 @@ footer a:hover{color:white}
  .nav-links.open{display:flex}
  .hero{min-height:570px;background-position:60% center}
  .hero-content{padding:75px 0}
- .intro-grid,.life-grid,.farm-grid,.contact-grid{grid-template-columns:1fr}
+ .intro-grid,.life-grid,.farm-grid,.contact-grid,.prospectus-layout{grid-template-columns:1fr}
+ .event-panel,.story-panel{padding:22px;gap:14px}
  .intro-image{height:300px}
  .cards,.ages,.admission-steps,.admission-layout{grid-template-columns:1fr}
  .form-row{grid-template-columns:1fr}
@@ -166,9 +195,12 @@ footer a:hover{color:white}
    <a href="#about">About</a>
    <a href="#learning">Learning</a>
    <a href="#life">School life</a>
+   <a href="#team">Our team</a>
    <a href="#gallery">Gallery</a>
+   <a href="#events">Events</a>
    <a href="#sponsorship">Sponsorship</a>
    <a href="#admissions">Admissions</a>
+   <a href="#faq">FAQs</a>
    <a href="#contact">Contact</a>
   </nav>
  </div>
@@ -263,6 +295,22 @@ footer a:hover{color:white}
  </div>
 </section>
 
+<section class="section" id="team">
+ <div class="container">
+  <div class="center">
+   <div class="eyebrow">The people behind the learning</div>
+   <h2>Our teachers and school community</h2>
+   <p class="section-intro">Teachers, school leaders, support staff and families all contribute to the life of the school. We look forward to introducing the team here with the school's approval.</p>
+  </div>
+  <div class="cards">
+   <article class="card team-card"><div class="team-mark">✦</div><div class="card-body"><h3>Teachers</h3><p>Meet the educators who guide learning, encourage curiosity and support each child's development.</p></div></article>
+   <article class="card team-card"><div class="team-mark">✿</div><div class="card-body"><h3>School leadership</h3><p>Learn about the people who help guide the school's educational vision and daily work.</p></div></article>
+   <article class="card team-card"><div class="team-mark">♡</div><div class="card-body"><h3>Wider community</h3><p>Discover the important role played by families, caregivers and the wider school community.</p></div></article>
+  </div>
+  <p class="editor-note">Staff names and portraits will be added after the school confirms the current team and approves each profile.</p>
+ </div>
+</section>
+
 <section class="section soft" id="gallery">
  <div class="container">
   <div class="center">
@@ -277,6 +325,20 @@ footer a:hover{color:white}
    <img src="/images/IMG_5b7357ec-13b8-4160-a026-d08e2f42d522.webp" alt="School dining hall">
    <img src="/images/IMG_7ed0fbe8-f42e-4900-95df-a58008f10a41.webp" alt="Dining area for students">
    <img src="/images/Agnes-scaled.jpg" alt="Boarding parent with children">
+  </div>
+ </div>
+</section>
+
+<section class="section" id="events">
+ <div class="container">
+  <div class="center">
+   <div class="eyebrow">What's happening</div>
+   <h2>School events and calendar</h2>
+   <p class="section-intro">School gatherings, celebrations and activities are an important part of community life. The school office can confirm upcoming dates and arrangements.</p>
+  </div>
+  <div class="event-panel">
+   <div class="event-icon">▦</div>
+   <div><h3>Upcoming dates will be shared here</h3><p>We are preparing this calendar with the school so that families see accurate, up-to-date information. Please contact the office for the current term dates and event notices.</p><a class="text-link" href="mailto:enquiries@steinerschoolmbagathi.co.ke?subject=School%20calendar%20enquiry">Ask about upcoming events →</a></div>
   </div>
  </div>
 </section>
@@ -301,6 +363,21 @@ footer a:hover{color:white}
    <p class="section-intro">Sponsorship is an important part of the school's community. Support can help children access learning opportunities and participate in school life.</p>
    <p class="section-intro">We believe that a child's opportunity to learn should not be limited by their family's financial circumstances. Every contribution towards education can make a meaningful difference.</p>
    <a class="btn" href="#contact">Contact the school</a>
+  </div>
+ </div>
+</section>
+
+<section class="section soft" id="voices">
+ <div class="container">
+  <div class="center">
+   <div class="eyebrow">Voices from our community</div>
+   <h2>Stories of learning and belonging</h2>
+   <p class="section-intro">We want this space to reflect genuine experiences from parents, former students and the school community.</p>
+  </div>
+  <div class="story-panel">
+   <h3>Real stories, shared with permission</h3>
+   <p>Community stories and testimonials will appear here once contributors have approved their words and how they are presented. We won't publish invented or anonymous quotes.</p>
+   <a class="text-link" href="mailto:enquiries@steinerschoolmbagathi.co.ke?subject=Community%20story%20enquiry">Ask how to share a story →</a>
   </div>
  </div>
 </section>
@@ -346,6 +423,43 @@ footer a:hover{color:white}
  </div>
 </section>
 
+<section class="section soft" id="prospectus">
+ <div class="container prospectus-layout">
+  <div>
+   <div class="eyebrow">A guide for families</div>
+   <h2>School prospectus</h2>
+   <p class="section-intro">Get a concise introduction to the school's educational approach, learning community and ways to make an enquiry. You can print this page or save it as a PDF from your browser.</p>
+   <button class="btn" type="button" id="printProspectus">Print / Save prospectus as PDF</button>
+   <p class="small-note">Please contact the school to confirm current fees, admissions requirements, term dates and availability. This website overview is not a substitute for the school's official prospectus.</p>
+  </div>
+  <div class="prospectus-preview">
+   <p class="eyebrow">Rudolf Steiner School Mbagathi</p>
+   <h3>Growing together. Learning for life.</h3>
+   <p>A learning community in Mbagathi, Kenya, inspired by the Waldorf approach to education.</p>
+   <ul><li>Kindergarten and school-age learning</li><li>Academic, artistic and practical experiences</li><li>Community, care and connection with nature</li><li>Admissions and sponsorship enquiries through the school office</li></ul>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="faq">
+ <div class="container">
+  <div class="center">
+   <div class="eyebrow">Helpful information</div>
+   <h2>Frequently asked questions</h2>
+   <p class="section-intro">A few starting points for families considering the school. For current policies and availability, please check directly with the school.</p>
+  </div>
+  <div class="faq-list">
+   <details><summary>What educational approach does the school follow?</summary><p>The school is inspired by the Waldorf approach, which brings together academic learning, creativity, practical activity and attention to child development.</p></details>
+   <details><summary>What learning stages does the school offer?</summary><p>The school website describes kindergarten, primary and junior secondary learning. Contact the office to confirm the current classes and entry points.</p></details>
+   <details><summary>Can families ask about boarding?</summary><p>Yes. Families can contact the school to ask about boarding availability, arrangements, age requirements and current costs.</p></details>
+   <details><summary>Does the school offer sponsorship?</summary><p>The school has described sponsorship as part of its community support. Eligibility, availability and application arrangements must be confirmed with the school office.</p></details>
+   <details><summary>How do I find out about fees?</summary><p>Fees can change. Please request the current fee schedule directly from the school rather than relying on older information found online.</p></details>
+   <details><summary>How can I arrange a visit or ask about admission?</summary><p>Use the admissions enquiry form on this page or contact the school office by phone or email to ask about visits and the current application process.</p></details>
+   <details><summary>Where is the school located?</summary><p>The school is in the Mbagathi area of Nairobi. Use the directions link in the contact section and confirm arrangements with the school before travelling.</p></details>
+  </div>
+ </div>
+</section>
+
 <section class="section" id="contact">
  <div class="container">
   <div class="eyebrow">Get in touch</div>
@@ -357,6 +471,7 @@ footer a:hover{color:white}
     <div class="contact-item"><strong>Telephone</strong><a href="tel:+254722830549">+254 722 830549</a></div>
     <div class="contact-item"><strong>Email</strong><a href="mailto:enquiries@steinerschoolmbagathi.co.ke">enquiries@steinerschoolmbagathi.co.ke</a></div>
     <div class="contact-item"><strong>Postal address</strong><span>P.O. Box 15609-00503, Mbagathi, Nairobi</span></div>
+    <div class="contact-item"><strong>Find us</strong><a href="https://www.google.com/maps/search/?api=1&query=Rudolf+Steiner+School+Mbagathi+Nairobi+Kenya" target="_blank" rel="noopener">Open directions in Google Maps ↗</a></div>
    </div>
    <div class="contact-note">
     <h3>Come and learn more</h3>
@@ -381,7 +496,9 @@ footer a:hover{color:white}
      <a href="#about">About us</a>
      <a href="#learning">Learning</a>
      <a href="#life">School life</a>
+     <a href="#team">Our team</a>
      <a href="#gallery">Gallery</a>
+     <a href="#events">Events</a>
     </div>
    </div>
    <div>
@@ -389,6 +506,9 @@ footer a:hover{color:white}
     <div class="footer-links">
      <a href="#sponsorship">Sponsorship</a>
      <a href="#admissions">Admissions</a>
+     <a href="#prospectus">Prospectus</a>
+     <a href="#faq">FAQs</a>
+     <a href="#voices">Community stories</a>
      <a href="#contact">Contact</a>
     </div>
    </div>
@@ -416,6 +536,11 @@ document.querySelectorAll('#navLinks a').forEach(link => {
 });
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+const printProspectusButton = document.getElementById('printProspectus');
+if (printProspectusButton) {
+  printProspectusButton.addEventListener('click', () => window.print());
+}
 
 const enquiryForm = document.getElementById('enquiryForm');
 if (enquiryForm) {
