@@ -185,6 +185,32 @@ footer a:hover{color:white}
  .stats{gap:8px}
  .stat strong{font-size:1.1rem}
 }
+
+/* Interactive gallery, photo tour and calendar */
+.gallery img{cursor:zoom-in}
+.lightbox{display:none;position:fixed;inset:0;z-index:300;background:#101810f2;align-items:center;justify-content:center;padding:65px 60px}
+.lightbox.open{display:flex}.lightbox figure{max-width:min(100%,1000px);text-align:center}
+.lightbox figure img{max-height:78vh;width:auto;max-width:100%;object-fit:contain;border-radius:5px}
+.lightbox figcaption{color:white;margin-top:12px}
+.lightbox-close,.lightbox-arrow{position:absolute;border:1px solid #ffffff70;background:#ffffff18;color:white;border-radius:50%;cursor:pointer}
+.lightbox-close{right:22px;top:18px;width:44px;height:44px;font-size:1.8rem}
+.lightbox-arrow{top:50%;width:44px;height:44px;font-size:2rem;transform:translateY(-50%)}
+.lightbox-prev{left:15px}.lightbox-next{right:15px}
+.tour-section{background:#f0eadc}.tour-viewer{max-width:900px;margin:35px auto 0;background:var(--paper);border-radius:10px;overflow:hidden;box-shadow:0 10px 30px #263c2518}
+.tour-viewer>img{height:460px;object-fit:cover}.tour-caption{padding:22px 25px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center}
+.tour-caption>span{font-weight:700;color:var(--terracotta);font-size:.82rem}.tour-caption h3{color:var(--green);font-size:1.35rem}.tour-caption p{color:var(--muted);font-size:.9rem}
+.tour-controls,.calendar-controls{display:flex;gap:8px}.tour-controls button,.calendar-controls button{border:1px solid #d8d2c4;background:var(--cream);color:var(--green);border-radius:5px;padding:9px 14px;cursor:pointer;font-weight:700}
+.calendar-shell{max-width:850px;margin:35px auto 0;background:var(--paper);border-radius:9px;padding:25px;box-shadow:0 7px 24px #263c2510}
+.calendar-top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:20px}.calendar-top h3{color:var(--green);font-size:1.35rem}
+.calendar-top p,.calendar-note{font-size:.86rem;color:var(--muted)}.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.calendar-day,.calendar-weekday{padding:10px 4px;text-align:center;border-radius:5px;font-size:.88rem}.calendar-weekday{font-weight:700;color:var(--green);background:#eee9dc}
+.calendar-day{background:#f8f5ed;min-height:43px}.calendar-day.muted{opacity:.35}.calendar-day.today{outline:2px solid var(--terracotta);font-weight:700;color:var(--green)}
+.calendar-note{margin-top:17px;padding:12px;background:#f0eadc;border-radius:5px}
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}.impact-grid>div{padding:20px;border:1px solid #ffffff55;border-radius:7px;background:#ffffff14}
+.impact-grid span{color:#ffdfaa;font-weight:700;font-size:.82rem}.impact-grid h3{font-size:1.15rem;margin:9px 0}.impact-grid p,.impact-caution{color:#fff1e9;font-size:.9rem}.impact-caution{margin-top:18px;font-size:.8rem}
+@media(max-width:700px){.lightbox{padding:65px 48px}.tour-viewer>img{height:290px}.tour-caption{grid-template-columns:1fr auto;gap:10px}.tour-caption>span{grid-column:1/-1}.calendar-shell{padding:15px}.calendar-day,.calendar-weekday{font-size:.75rem;padding:8px 1px}.calendar-day{min-height:36px}.calendar-top{align-items:flex-start;flex-direction:column}.impact-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -200,6 +226,7 @@ footer a:hover{color:white}
    <a href="#about">About</a>
    <a href="#learning">Learning</a>
    <a href="#life">School life</a>
+   <a href="#tour">Photo tour</a>
    <a href="#team">Our team</a>
    <a href="#gallery">Gallery</a>
    <a href="#events">Events</a>
@@ -300,6 +327,12 @@ footer a:hover{color:white}
  </div>
 </section>
 
+<section class="section tour-section" id="tour">
+ <div class="container">
+  <div class="center"><div class="eyebrow">Take a closer look</div><h2>A little tour of our school</h2><p class="section-intro">Explore real photographs of the school community and its surroundings. This is a photo tour, not a live 360-degree walkthrough.</p></div>
+  <div class="tour-viewer"><img id="tourImage" src="/images/DSCN2256-scaled.jpg" alt="A teacher sharing a moment with two pupils"><div class="tour-caption"><span id="tourCount">01 / 06</span><div><h3 id="tourTitle">Learning together</h3><p id="tourDescription">A moment of care and connection.</p></div><div class="tour-controls"><button type="button" id="tourPrev" aria-label="Previous tour photo">←</button><button type="button" id="tourNext" aria-label="Next tour photo">→</button></div></div></div>
+ </div>
+</section>
 <section class="section" id="team">
  <div class="container">
   <div class="center">
@@ -341,9 +374,10 @@ footer a:hover{color:white}
    <h2>School events and calendar</h2>
    <p class="section-intro">School gatherings, celebrations and activities are an important part of community life. The school office can confirm upcoming dates and arrangements.</p>
   </div>
-  <div class="event-panel">
-   <div class="event-icon">▦</div>
-   <div><h3>Upcoming dates will be shared here</h3><p>We are preparing this calendar with the school so that families see accurate, up-to-date information. Please contact the office for the current term dates and event notices.</p><a class="text-link" href="mailto:enquiries@steinerschoolmbagathi.co.ke?subject=School%20calendar%20enquiry">Ask about upcoming events →</a></div>
+  <div class="calendar-shell">
+   <div class="calendar-top"><div><h3 id="calendarMonth">School calendar</h3><p>Dates will be added after confirmation by the school.</p></div><div class="calendar-controls"><button type="button" id="calendarPrev" aria-label="Previous month">←</button><button type="button" id="calendarToday">Today</button><button type="button" id="calendarNext" aria-label="Next month">→</button></div></div>
+   <div class="calendar-grid" id="calendarGrid" aria-label="Monthly calendar"></div>
+   <p class="calendar-note" id="calendarNote" role="status">No school dates have been published here yet. Please contact the school office for confirmed term dates and events.</p>
   </div>
  </div>
 </section>
@@ -371,6 +405,12 @@ footer a:hover{color:white}
     <div><h3>For families</h3><p>Contact the school to ask whether support is available, what the eligibility criteria are and how to make an application.</p></div>
     <div><h3>For supporters</h3><p>Get in touch with the school to discuss its current needs and approved ways to contribute. Please confirm all arrangements directly with the school.</p></div>
    </div>
+   <div class="impact-grid">
+    <div><span>01</span><h3>Access to learning</h3><p>Ask the school how its sponsorship programme supports access to education.</p></div>
+    <div><span>02</span><h3>Support with dignity</h3><p>Families can discuss their circumstances privately with the school office.</p></div>
+    <div><span>03</span><h3>Community partnership</h3><p>Supporters can ask about current priorities and approved contribution channels.</p></div>
+   </div>
+   <p class="impact-caution">No sponsorship totals, beneficiary numbers or donation instructions are published without current confirmation from the school.</p>
    <a class="btn" href="mailto:enquiries@steinerschoolmbagathi.co.ke?subject=Sponsorship%20and%20support%20enquiry">Ask about sponsorship</a>
   </div>
  </div>
@@ -506,6 +546,7 @@ footer a:hover{color:white}
      <a href="#learning">Learning</a>
      <a href="#life">School life</a>
      <a href="#team">Our team</a>
+     <a href="#tour">Photo tour</a>
      <a href="#gallery">Gallery</a>
      <a href="#events">Events</a>
     </div>
@@ -525,6 +566,10 @@ footer a:hover{color:white}
   <div class="copyright">© <span id="year"></span> Rudolf Steiner School Mbagathi. Website concept.</div>
  </div>
 </footer>
+<div class="lightbox" id="galleryLightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Photo viewer">
+ <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close photo viewer">×</button><button type="button" class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+ <figure><img id="lightboxImage" src="" alt=""><figcaption id="lightboxCaption"></figcaption></figure><button type="button" class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
+</div>
 
 <script>
 const menuBtn = document.getElementById('menuBtn');
@@ -572,6 +617,77 @@ if (enquiryForm) {
     window.location.href = 'mailto:enquiries@steinerschoolmbagathi.co.ke?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   });
 }
+
+// Accessible gallery lightbox
+const galleryImages = Array.from(document.querySelectorAll('.gallery img'));
+const lightbox = document.getElementById('galleryLightbox');
+let galleryIndex = 0;
+function showGalleryImage(index) {
+  galleryIndex = (index + galleryImages.length) % galleryImages.length;
+  const image = galleryImages[galleryIndex];
+  document.getElementById('lightboxImage').src = image.src;
+  document.getElementById('lightboxImage').alt = image.alt;
+  document.getElementById('lightboxCaption').textContent = image.alt;
+}
+function openLightbox(index) {
+  showGalleryImage(index); lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden'; document.getElementById('lightboxClose').focus();
+}
+function closeLightbox() {
+  lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); document.body.style.overflow = '';
+}
+galleryImages.forEach((img,index) => {
+  img.tabIndex=0; img.setAttribute('role','button'); img.setAttribute('aria-label','Enlarge photo: '+img.alt);
+  img.addEventListener('click',()=>openLightbox(index));
+  img.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(index);}});
+});
+document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
+document.getElementById('lightboxPrev').addEventListener('click',()=>showGalleryImage(galleryIndex-1));
+document.getElementById('lightboxNext').addEventListener('click',()=>showGalleryImage(galleryIndex+1));
+lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox();});
+document.addEventListener('keydown',event=>{if(!lightbox.classList.contains('open'))return;if(event.key==='Escape')closeLightbox();if(event.key==='ArrowLeft')showGalleryImage(galleryIndex-1);if(event.key==='ArrowRight')showGalleryImage(galleryIndex+1);});
+
+// Photo tour from the school's existing images
+const tourStops = [
+ {src:'/images/DSCN2256-scaled.jpg',alt:'A teacher sharing a moment with two pupils',title:'Learning together',description:'A moment of care and connection between a teacher and pupils.'},
+ {src:'/images/DSCN0943-scaled.jpg',alt:'Students gathered during a school assembly',title:'Community gatherings',description:'Students coming together during a school event.'},
+ {src:'/images/DSCN4154-1-scaled.jpg',alt:'Children playing flute at an event',title:'Music and creativity',description:'Children sharing music as part of school life.'},
+ {src:'/images/IMG_5b7357ec-13b8-4160-a026-d08e2f42d522.webp',alt:'School dining hall',title:'Shared spaces',description:'A glimpse of the dining space used by students.'},
+ {src:'/images/DSCN4608-scaled.jpg',alt:'A sunflower growing at the school',title:'Connection with nature',description:'A small reminder of the natural world around the school.'},
+ {src:'/images/IMG_27effba4-f81a-446d-9c55-fd640f99387c.webp',alt:'Rudolf Steiner School Mbagathi sign',title:'Welcome to Mbagathi',description:'The school sign at the entrance to the community.'}
+];
+let tourIndex=0;
+function showTour(index){
+ tourIndex=(index+tourStops.length)%tourStops.length;const stop=tourStops[tourIndex];
+ document.getElementById('tourImage').src=stop.src;document.getElementById('tourImage').alt=stop.alt;
+ document.getElementById('tourTitle').textContent=stop.title;document.getElementById('tourDescription').textContent=stop.description;
+ document.getElementById('tourCount').textContent=String(tourIndex+1).padStart(2,'0')+' / '+String(tourStops.length).padStart(2,'0');
+}
+document.getElementById('tourPrev').addEventListener('click',()=>showTour(tourIndex-1));
+document.getElementById('tourNext').addEventListener('click',()=>showTour(tourIndex+1));
+
+// Month-view calendar: no school dates are invented.
+let calendarDate=new Date();
+const calendarGrid=document.getElementById('calendarGrid');
+const monthLabel=document.getElementById('calendarMonth');
+const monthFormatter=new Intl.DateTimeFormat('en',{month:'long',year:'numeric'});
+function renderCalendar(){
+ const year=calendarDate.getFullYear(),month=calendarDate.getMonth();monthLabel.textContent=monthFormatter.format(calendarDate);calendarGrid.innerHTML='';
+ ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(day=>{const cell=document.createElement('div');cell.className='calendar-weekday';cell.textContent=day;calendarGrid.appendChild(cell);});
+ const firstDay=new Date(year,month,1).getDay(),daysInMonth=new Date(year,month+1,0).getDate(),previousMonthDays=new Date(year,month,0).getDate(),today=new Date();
+ for(let i=0;i<42;i++){const cell=document.createElement('div');cell.className='calendar-day';let number;
+  if(i<firstDay){number=previousMonthDays-firstDay+i+1;cell.classList.add('muted');}
+  else if(i>=firstDay+daysInMonth){number=i-firstDay-daysInMonth+1;cell.classList.add('muted');}
+  else{number=i-firstDay+1;if(number===today.getDate()&&month===today.getMonth()&&year===today.getFullYear())cell.classList.add('today');}
+  cell.textContent=number;calendarGrid.appendChild(cell);
+ }
+ document.getElementById('calendarNote').textContent='No school dates have been published here yet. Please contact the school office for confirmed term dates and events.';
+}
+document.getElementById('calendarPrev').addEventListener('click',()=>{calendarDate.setMonth(calendarDate.getMonth()-1);renderCalendar();});
+document.getElementById('calendarNext').addEventListener('click',()=>{calendarDate.setMonth(calendarDate.getMonth()+1);renderCalendar();});
+document.getElementById('calendarToday').addEventListener('click',()=>{calendarDate=new Date();renderCalendar();});
+renderCalendar();
+
 </script>
 </body>
   </html>
