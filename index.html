@@ -246,6 +246,21 @@ footer a:hover{color:white}
 @media(max-width:850px){.rhythm{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.rhythm,.festival-strip{grid-template-columns:1fr}.explorer{padding:17px}}
 
+
+/* Helpful visitor pathways and gallery filters */
+.visitor-guide{margin-top:30px;background:var(--paper);padding:26px;border-radius:9px;box-shadow:0 7px 24px #263c2510}
+.visitor-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}
+.visitor-tabs button,.gallery-filters button{border:1px solid #d8d2c4;background:var(--cream);color:var(--green);padding:10px 14px;border-radius:5px;cursor:pointer;font-weight:700}
+.visitor-tabs button[aria-pressed="true"],.gallery-filters button[aria-pressed="true"]{background:var(--green);color:white;border-color:var(--green)}
+.visitor-result{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.visitor-result h3{color:var(--green);margin-bottom:7px}
+.visitor-result p{color:var(--muted)}
+.visitor-result a{display:inline-block;margin-top:12px;color:var(--terracotta);font-weight:700}
+.gallery-filters{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:25px 0 16px}
+.gallery img.gallery-hidden{display:none}
+.gallery-empty{display:none;text-align:center;color:var(--muted);padding:18px}
+@media(max-width:700px){.visitor-guide{padding:18px}.visitor-result{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -268,6 +283,7 @@ footer a:hover{color:white}
    <a href="#gallery">Gallery</a>
    <a href="#events">Events</a>
    <a href="#sponsorship">Sponsorship</a>
+   <a href="#plan-your-visit">Plan a visit</a>
    <a href="#admissions">Admissions</a>
    <a href="#faq">FAQs</a>
    <a href="#contact">Contact</a>
@@ -333,15 +349,15 @@ footer a:hover{color:white}
   </div>
   <div class="cards">
    <article class="card">
-    <img src="/images/DSCN0943-scaled.jpg" alt="Children gathered during a school assembly">
+    <img src="/images/DSCN0943-scaled.jpg" alt="Children gathered during a school assembly" data-gallery-category="people">
     <div class="card-body"><h3>Academic learning</h3><p>Children explore subjects including mathematics, languages, science, history and geography through engaging learning experiences.</p></div>
    </article>
    <article class="card">
-    <img src="/images/Agnes-scaled.jpg" alt="Boarding parent with children">
+    <img src="/images/Agnes-scaled.jpg" alt="Boarding parent with children" data-gallery-category="people">
     <div class="card-body"><h3>Care and belonging</h3><p>Relationships, guidance and a sense of belonging are important parts of a supportive school community.</p></div>
    </article>
    <article class="card">
-    <img src="/images/DSCN2401-scaled.jpg" alt="Children enjoying time together outdoors">
+    <img src="/images/DSCN2401-scaled.jpg" alt="Children enjoying time together outdoors" data-gallery-category="people">
     <div class="card-body"><h3>Learning beyond books</h3><p>Time outdoors, friendships, creativity and practical activities all contribute to children's development.</p></div>
    </article>
   </div>
@@ -402,7 +418,7 @@ footer a:hover{color:white}
     <li>Shared events and community celebrations</li>
    </ul>
   </div>
-  <img src="/images/DSCN4154-1-scaled.jpg" alt="Children playing flutes at a school event">
+  <img src="/images/DSCN4154-1-scaled.jpg" alt="Children playing flutes at a school event" data-gallery-category="music">
  </div>
  <div class="container">
   <div class="explorer" aria-label="Explore school activities">
@@ -452,12 +468,19 @@ footer a:hover{color:white}
    <h2>A glimpse of school life</h2>
    <p class="section-intro">A few moments from the people, activities and surroundings that make up the school community.</p>
   </div>
+  <div class="gallery-filters" role="group" aria-label="Filter school photographs">
+   <button type="button" data-gallery-filter="all" aria-pressed="true">All moments</button>
+   <button type="button" data-gallery-filter="people" aria-pressed="false">People and community</button>
+   <button type="button" data-gallery-filter="music" aria-pressed="false">Music and events</button>
+   <button type="button" data-gallery-filter="spaces" aria-pressed="false">School spaces</button>
+   <button type="button" data-gallery-filter="nature" aria-pressed="false">Nature</button>
+  </div>
   <div class="gallery">
    <img class="wide" src="/images/DSCN0943-scaled.jpg" alt="Students gathered at an event">
    <img src="/images/DSCN4154-1-scaled.jpg" alt="Children playing flute">
    <img src="/images/DSCN2401-scaled.jpg" alt="Children sitting together in a tree">
-   <img src="/images/IMG_5b7357ec-13b8-4160-a026-d08e2f42d522.webp" alt="School dining hall">
-   <img src="/images/IMG_7ed0fbe8-f42e-4900-95df-a58008f10a41.webp" alt="Dining area for students">
+   <img src="/images/IMG_5b7357ec-13b8-4160-a026-d08e2f42d522.webp" alt="School dining hall" data-gallery-category="spaces">
+   <img src="/images/IMG_7ed0fbe8-f42e-4900-95df-a58008f10a41.webp" alt="Dining area for students" data-gallery-category="spaces">
    <img src="/images/Agnes-scaled.jpg" alt="Boarding parent with children">
   </div>
   <div class="gallery-tools"><button type="button" id="slideshowToggle" aria-pressed="false">▶ Start slideshow</button><button type="button" id="slideshowPrev">← Previous</button><button type="button" id="slideshowNext">Next →</button><span class="small-note" id="slideshowStatus" role="status" aria-live="polite">Slideshow is paused.</span></div>
@@ -836,6 +859,22 @@ const learningPrompts=[
 document.getElementById('nextLearningPrompt').addEventListener('click',()=>{learningPromptIndex=(learningPromptIndex+1)%learningPrompts.length;document.getElementById('learningPromptTitle').textContent=learningPrompts[learningPromptIndex][0];document.getElementById('learningPromptText').textContent=learningPrompts[learningPromptIndex][1];});
 const farmDiscover=document.getElementById('farmDiscover'),farmExtra=document.getElementById('farmExtra');
 farmDiscover.addEventListener('click',()=>{const open=farmExtra.classList.toggle('open');farmDiscover.setAttribute('aria-expanded',String(open));farmDiscover.textContent=open?'Show less −':'Explore the farm and garden +';});
+
+
+const visitorContent={
+ family:{title:'Discover learning and admissions',text:'Explore the learning stages, school approach and admissions information. For current fees, availability and requirements, contact the school office directly.',link:'#admissions',label:'Explore admissions →'},
+ supporter:{title:'Learn how to support the community',text:'The school can advise on current needs, approved contribution methods and sponsorship arrangements. Please contact the office before making a contribution.',link:'#sponsorship',label:'Explore sponsorship →'},
+ educator:{title:'Explore the educational approach',text:'Read about the school's Steiner/Waldorf approach, learning stages, Main Lesson and published teacher-development information. Confirm current training opportunities with the school.',link:'#school-details',label:'Explore school information →'},
+ visitor:{title:'Arrange a visit with the school',text:'If you would like to visit, contact the school office first to ask about suitable dates, visitor arrangements and any safeguarding requirements.',link:'#contact',label:'Contact the school →'}
+};
+document.querySelectorAll('[data-visitor]').forEach(button=>button.addEventListener('click',()=>{
+ const item=visitorContent[button.dataset.visitor];document.querySelectorAll('[data-visitor]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+ document.getElementById('visitorResult').innerHTML='<div><h3>'+item.title+'</h3><p>'+item.text+'</p><a href="'+item.link+'">'+item.label+'</a></div>';
+}));
+document.querySelectorAll('[data-gallery-filter]').forEach(button=>button.addEventListener('click',()=>{
+ const filter=button.dataset.galleryFilter;document.querySelectorAll('[data-gallery-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+ document.querySelectorAll('#gallery .gallery img').forEach(img=>img.classList.toggle('gallery-hidden',filter!=='all'&&img.dataset.galleryCategory!==filter));
+}));
 
 </script>
 </body>
